@@ -138,7 +138,7 @@ resource "aws_security_group" "public_ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [var.all_traffic]
+    cidr_blocks = [var.all_traffic] # for real-world deployment restrict to your own ip
 
   }
 
