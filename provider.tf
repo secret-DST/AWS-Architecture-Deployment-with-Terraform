@@ -13,8 +13,8 @@ terraform {
   # storing state file remotely in s3 bucket(which has already been created)
 
   backend "s3" {
-    bucket       = "buck-1-state-store"
-    key          = "dev/terraform.tfstate"
+    bucket       = "<your-s3-state-bucket>"
+    key          = "path/to/terraform.tfstate"
     region       = "eu-west-2"
     encrypt      = true
     use_lockfile = true
