@@ -1,7 +1,8 @@
 # AWS Infrastructure with Terraform
 ## Architectural Diagram
-<img width="827" height="701" alt="Screenshot 2026-08-11 134359" src="https://github.com/user-attachments/assets/1aaeac20-72e8-4f97-b26e-7a3438215fc5" />
+<img width="827" height="601" alt="Screenshot 2026-08-11 134359" src="https://github.com/user-attachments/assets/1aaeac20-72e8-4f97-b26e-7a3438215fc5" />
 
+NOTE: The terraform code only deploys one ec2 instance in each subnet. To increase the amount simply configure the "count" argument.
 
 ## Overview
 
