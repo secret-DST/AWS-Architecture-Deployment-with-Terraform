@@ -1,4 +1,4 @@
-# using the latest version of terraform and aws cli
+# using the version 1.15.x of terraform and aws cli
 
 terraform {
   required_version = "~> 1.15.0"
