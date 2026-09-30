@@ -1,4 +1,7 @@
 # AWS Infrastructure with Terraform
+## Architectural Diagram
+<img width="827" height="701" alt="Screenshot 2026-08-11 134359" src="https://github.com/user-attachments/assets/1aaeac20-72e8-4f97-b26e-7a3438215fc5" />
+
 
 ## Overview
 
@@ -19,28 +22,6 @@ The goal of this project is to demonstrate practical **DevOps / DevSecOps infras
 * Resource dependencies and references
 
 The infrastructure is split across multiple Terraform files to keep the configuration organised and maintainable.
-
-## Architecture
-
-The environment contains:
-
-```
-                           Internet
-                              |
-                              |
-                       Internet Gateway
-                              |
-                    +---------+---------+
-                    |                   |
-              Public Subnet         Private Subnet
-              eu-west-2a             eu-west-2b
-                    |                   |
-              Public EC2           Private EC2
-                    |                   |
-                    +---- NAT Gateway -+
-                           |
-                      Elastic IP
-```
 
 ### Network design
 
@@ -127,8 +108,8 @@ The public EC2 instance is deployed into the public subnet and receives a public
 
 It is associated with a security group allowing:
 
-* SSH — port 22
-* HTTP — port 80
+* SSH - port 22
+* HTTP - port 80
 * Outbound traffic
 
 ### Private EC2
@@ -262,19 +243,14 @@ Before deploying the infrastructure, install:
 * An AWS account
 * AWS credentials configured locally
 
-Verify Terraform:
+## Setup
+
+Make sure Terraform and AWS CLI are installed and configured:
 
 ```bash
 terraform version
-```
-
-Verify AWS CLI authentication:
-
-```bash
 aws sts get-caller-identity
 ```
-
----
 
 ## Deployment
 
@@ -287,13 +263,13 @@ cd <repository-name>
 
 ### 2. Configure the S3 backend
 
-Create an S3 bucket for Terraform state and update:
+Add your S3 bucket name to the Terraform backend:
 
 ```hcl
 bucket = "<your-s3-state-bucket>"
 ```
 
-Do not commit credentials or sensitive information to the repository.
+Do not commit AWS credentials or other sensitive information.
 
 ### 3. Initialise Terraform
 
@@ -301,61 +277,40 @@ Do not commit credentials or sensitive information to the repository.
 terraform init
 ```
 
-### 4. Format the configuration
+### 4. Check the configuration
 
 ```bash
 terraform fmt -recursive
-```
-
-### 5. Validate the configuration
-
-```bash
 terraform validate
 ```
 
-### 6. Review the execution plan
+### 5. Review and deploy
 
 ```bash
 terraform plan
-```
-
-Review the resources Terraform intends to create before applying.
-
-### 7. Deploy
-
-```bash
 terraform apply
 ```
 
-Review the plan and confirm the deployment.
-
-### 8. View outputs
+### 6. View the outputs
 
 ```bash
 terraform output
 ```
 
-To retrieve the public EC2 IP:
+For the public EC2 IP:
 
 ```bash
 terraform output ec2_public_ip
 ```
 
----
+## Destroy
 
-## Destroying the Infrastructure
-
-When finished with the lab:
+When finished, remove the infrastructure to avoid unnecessary AWS costs:
 
 ```bash
 terraform destroy
 ```
 
-This removes the infrastructure managed by Terraform.
-
-Destroying the environment when it is no longer required also helps avoid unnecessary AWS charges.
-
----
 
 ## Terraform Workflow
 
@@ -495,9 +450,7 @@ This would extend the project from basic Terraform provisioning into a more comp
 
 ## Disclaimer
 
-This project is intended as a learning and portfolio project.
-
-The configuration should be reviewed and hardened before being used in a production environment.
-
-AWS resources can incur costs. Destroy the infrastructure when it is no longer required.
+- This project is intended as a learning and portfolio project.
+- The configuration should be reviewed and hardened before being used in a production environment.
+- AWS resources can incur costs. Destroy the infrastructure when it is no longer required.
 
