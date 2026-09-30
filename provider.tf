@@ -10,7 +10,7 @@ terraform {
     }
   }
 
-  # storing state file remotely in s3 bucket(which has already been created)
+  # storing state file remotely in s3 bucket(which has already been created through GUI)
 
   backend "s3" {
     bucket       = "<your-s3-state-bucket>"  # specify your bucket name in which you want to store the state file
