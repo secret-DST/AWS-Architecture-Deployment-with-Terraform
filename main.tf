@@ -177,7 +177,7 @@ resource "aws_instance" "private" {
     aws_security_group.private_ec2.id
   ]
 
-  count = 1
+  count = 1 # using count to make number of instances configurable
 
   tags = {
     Name = "private-EC2"
